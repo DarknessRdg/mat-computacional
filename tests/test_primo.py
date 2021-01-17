@@ -13,8 +13,8 @@ def test_primos(primo):
 
 
 @pytest.mark.parametrize('nao_primo', [
-    1, 4, 6, 8, 9, 10, 12, 14, 15, 16,
-    18, 20, 21, 24
+    0, 1, 4, 6, 8, 9, 10, 12, 14, 15,
+    16, 18, 20, 21, 24
 ])
 def test_nao_sao_primos(nao_primo):
     assert not eh_primo(nao_primo)

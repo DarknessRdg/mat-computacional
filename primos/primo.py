@@ -5,7 +5,7 @@ def eh_divisivel(numero, divisor):
 def eh_primo(numero):
     intervalo_de_teste = range(2, numero // 2 + 1)
 
-    if numero == 1:
+    if 0 <= numero <= 1:
         return False
 
     for divisor in intervalo_de_teste:
