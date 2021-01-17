@@ -13,3 +13,13 @@ def eh_primo(numero):
             return False
 
     return True
+
+
+def somar_todos_primos_ate(fim):
+    atual = 0
+
+    somatorio = 0
+    while atual <= fim:
+        somatorio += atual if eh_primo(atual) else 0
+        atual += 1
+    return somatorio
