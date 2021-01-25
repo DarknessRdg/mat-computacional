@@ -1,20 +1,56 @@
-def _default_min_loop():
-    return 6
+import math
+from decimal import Decimal, localcontext, ROUND_DOWN
 
 
-def _default_media(a, b):
+def trunc(numero: float, n: int) -> float:
+    """
+    Trunca um número float em N casas decimais sem arredondamento
+    """
+    with localcontext() as context:
+        context.rounding = ROUND_DOWN
+        exponent = Decimal(str(10 ** - n))
+        return float(Decimal(str(numero)).quantize(exponent).to_eng_string())
+
+
+def _default_media(a: float, b: float) -> float:
+    """
+    Função que retorna média de dois números
+    """
     return (a + b) / 2
 
 
-def bissecao(a, b, funcao, media=_default_media, tolerancia=None, min_loops=None):
-    min_loops = min_loops or _default_min_loop()
+def bissecao(
+        a: float,
+        b: float,
+        funcao: callable,
+        media: callable = _default_media,
+        tolerancia: float = None,
+        max_loops: int = 50
+) -> float:
+    """
+    Cálculo numéro da bisseção.
+    """
+    x = funcao(m(a, b))
 
-    for i in range(min_loops):
+    stop = False
+
+    for i in range(1, max_loops + 1):
+        if stop:
+            break
+
+        feedback = (
+            'loop = {},  '
+            'a = {},  '
+            'b = {},  '
+        )
+        print(feedback.format(i, a, b), end='')
         x = media(a, b)
 
         f_a = funcao(a)
-        f_b = funcao(b)
         f_x = funcao(x)
+
+        if abs((b - a) / 2) < tolerancia or f_x == 0:
+            stop = True
 
         if f_x * f_a < 0:
             b = x
@@ -22,12 +58,38 @@ def bissecao(a, b, funcao, media=_default_media, tolerancia=None, min_loops=None
             a = x
 
         feedback = (
-            'a = {},  '
-            'b = {},  '
             'x = {},  '
+            'f(x) = {},  '
             'f(a) = {},  '
-            'f(b) = {},  '
-            'f(x) = {}'
         )
-        feedback = feedback.format(a, b, x, f_a, f_b, f_x)
+        feedback = feedback.format(x, f_x, f_a)
         print(feedback)
+
+    return x
+
+
+if __name__ == '__main__':
+    def f(value):
+        def wrapper(x):
+            return math.e ** x - math.sin(x) - 2
+
+        return trunc(wrapper(value), 4)
+
+
+    def m(a, b):
+        return trunc(_default_media(a, b), 4)
+
+
+    resultado = trunc(
+        bissecao(
+            a=1,
+            b=2,
+            funcao=f,
+            media=m,
+            tolerancia=10 ** (-3)
+        ),
+        n=4
+    )
+
+    print('resultado', resultado)
+    print('f(resultado) =', f(resultado))
