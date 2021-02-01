@@ -62,7 +62,7 @@ def falsa_posicao(
     primeira = True
     f_x = 1
 
-    while primeira or abs(f_x) >= torlancia:
+    while primeira or abs(f_x) > torlancia:
         primeira = False
 
         f_a = funcao(a)
