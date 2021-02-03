@@ -1,3 +1,6 @@
+from utils import preview, prepare_function, trunc
+
+
 def falsa_posicao(
     a: float,
     b: float,

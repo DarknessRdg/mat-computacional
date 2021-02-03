@@ -1,5 +1,5 @@
-from metodos_de_intervalo.falsa_posicao import preview
-from metodos_de_intervalo.funcoes_professor import letra_a, derivada_letra_a
+from funcoes_professor import letra_a, derivada_letra_a
+from utils import preview
 
 
 def newton(inicial, funcao, derivada, tolerancia):
