@@ -1,16 +1,18 @@
-N_TRUNC = 4
+import math
+
+
+N_TRUNC = 50
 
 
 def trunc(numero: float) -> float:
     """
     Trunca um número float em N casas decimais sem arredondamento
     """
-    numero = str(float(numero))
-    inteira, decimal = numero.split('.')
+    if numero == 0:
+        return 0.0
 
-    decimal += '0' * N_TRUNC
-
-    return float('{}.{}'.format(inteira, decimal[:N_TRUNC]))
+    factor = 10.0 ** N_TRUNC
+    return math.trunc(numero * factor) / factor
 
 
 def preview(numero: float) -> str:
