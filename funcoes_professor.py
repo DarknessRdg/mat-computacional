@@ -57,3 +57,32 @@ def letra_g(x):
 
 def derivada_letra_g(x):
     return trunc(2*x + math.e**x)
+
+
+def matriz_a():
+    matrix = [
+        [0.5, 4],
+        [2, 0.5]
+    ]
+    b = [2, 3]
+    return matrix, b
+
+
+def matriz_b():
+    matriz = [
+        [1.2, 3, 2.5],
+        [2.3, 3.2, 0.5],
+        [3.4, 2.4, 2.1]
+    ]
+    b = [4, 5, 6]
+    return matriz, b
+
+
+def matriz_c():
+    matriz = [
+        [0, 2, 7.5],
+        [3.6, 4.2, 0.5],
+        [5.4, 1.4, 4.5]
+    ]
+    b = [6, 7, 8]
+    return matriz, b
