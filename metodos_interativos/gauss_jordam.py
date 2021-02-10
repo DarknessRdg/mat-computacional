@@ -17,7 +17,7 @@ def get_pivo(linha: List[float], index_pivo: int) -> float:
     return linha[index_pivo]
 
 
-def gauss_jordan(
+def gauss_jordam(
     matiz: List[List[float]],
     valores_b: List[float]
 ) -> List[float]:
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     ]
     b = [12, -6.5, 16, 17]
 
-    raizes = gauss_jordan(m, b)
+    raizes = gauss_jordam(m, b)
 
     for i, x in enumerate(raizes):
         print(f'x{i+1} = {x}')
