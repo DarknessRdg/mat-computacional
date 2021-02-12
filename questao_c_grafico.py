@@ -1,3 +1,6 @@
+from utils import trunc
+
+
 def newton(inicial, funcao, derivada, tolerancia):
     x0 = inicial
     x1 = x0
@@ -40,7 +43,7 @@ def bissecao(a, b, funcao, tolerancia, max_loops=50):
 
         f_a = funcao(a)
         f_x = funcao(x)
-        todos_x.append(f_x)
+        todos_x.append((b - a) / 2)
 
         if abs((b - a) / 2) < tolerancia or f_x == 0:
             stop = True
@@ -122,12 +125,15 @@ def normaliza(*arg):
 
     arg = list(arg)
 
-    maior = max(arg, key=len)
+    for i in arg:
+        for j in range(len(i)):
+            i[j] = trunc(i[j])
+
     for i in arg:
         while len(i) > 15:
             i.pop()
 
-        while len(i) < len(maior):
+        while len(i) < 15:
             i.append('')
 
 
@@ -141,10 +147,13 @@ if __name__ == '__main__':
         newton(2, f, f_, tolerancia)
     ]
 
+    planilha.write('secante;falsa posicao;bissecao;newton\n')
+
+    def s(s):
+        return str(s).replace('.', ',')
+
     normaliza(*res)
-    for i in res:
-        planilha.write(','.join(map(str, i)))
+    for i in range(15):
+        planilha.write(';'.join(map(s, (res[0][i], res[1][i], res[2][i], res[3][i]))))
         planilha.write('\n')
     planilha.close()
-
-
