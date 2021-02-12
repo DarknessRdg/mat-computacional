@@ -1,3 +1,5 @@
+import math
+
 from utils import preview, prepare_function, trunc
 
 
@@ -43,12 +45,10 @@ def falsa_posicao(
 
 
 def main():
-    equacao = input('digite a equacao: ')
-    a = float(input('digite o valor de a: '))
-    b = float(input('digite o valor de b: '))
-    tol = float(input('digite o valor de tolerancia: '))
 
-    equacao = prepare_function(equacao)
+    equacao = lambda x: trunc(4 * math.sin(x) - 3 * x)
+    a, b = 1, 2
+    tol = 10**(-3)
 
     res = trunc(falsa_posicao(a, b, equacao, tol))
 
@@ -61,8 +61,4 @@ def main():
 # pra executar todods
 # faca python3 nome.py < entrada.txt
 if __name__ == '__main__':
-    while True:
-        try:
-            main()
-        except EOFError:
-            break
+    main()

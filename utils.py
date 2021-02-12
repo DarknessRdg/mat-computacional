@@ -1,7 +1,7 @@
 import math
 
 
-N_TRUNC = 50
+N_TRUNC = 4
 
 
 def trunc(numero: float) -> float:

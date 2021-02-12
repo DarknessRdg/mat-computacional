@@ -1,15 +1,6 @@
 import math
-from decimal import Decimal, localcontext, ROUND_DOWN
 
-
-def trunc(numero: float, n: int) -> float:
-    """
-    Trunca um número float em N casas decimais sem arredondamento
-    """
-    with localcontext() as context:
-        context.rounding = ROUND_DOWN
-        exponent = Decimal(str(10 ** - n))
-        return float(Decimal(str(numero)).quantize(exponent).to_eng_string())
+from utils import trunc
 
 
 def _default_media(a: float, b: float) -> float:
@@ -71,25 +62,22 @@ def bissecao(
 if __name__ == '__main__':
     def f(value):
         def wrapper(x):
-            return math.e ** x - math.sin(x) - 2
+            return x**3 + 12*x**2 - 100*x -6
 
-        return trunc(wrapper(value), 4)
+        return trunc(wrapper(value))
 
 
     def m(a, b):
-        return trunc(_default_media(a, b), 4)
-
+        return trunc(_default_media(a, b))
 
     resultado = trunc(
         bissecao(
-            a=1,
-            b=2,
+            a=5,
+            b=6,
             funcao=f,
             media=m,
             tolerancia=10 ** (-3)
-        ),
-        n=4
+        )
     )
-
     print('resultado', resultado)
     print('f(resultado) =', f(resultado))
