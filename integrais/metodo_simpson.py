@@ -24,6 +24,14 @@ def metodo_compost(a, b, n, funcao):
     return soma
 
 
+def treis_oitavos(a, b, funcao):
+    a, b = sorted([a, b])
+
+    h = (b - a) / 2
+    x2 = a + h
+    return metodo_simple(a, x2, funcao) + metodo_simple(x2, b, funcao)
+
+
 if __name__ == '__main__':
     print(metodo_simple(1, 3, lambda x: e**(-x**2)))
     print(metodo_compost(1, 3, 2, lambda x: e**(-x**2)))
