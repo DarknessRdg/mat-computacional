@@ -1,4 +1,4 @@
-from math import e
+from math import e, sqrt, pi
 
 
 def tapezio_simples(a, b, funcao):
@@ -20,6 +20,10 @@ def trapezio_compost(a, b, n, funcao):
     return soma
 
 
+def formula(x):
+    return (e ** (-(x**2) / 2)) / (sqrt(2*pi))
+
+
 if __name__ == '__main__':
-    print(tapezio_simples(3, 1, lambda x: e**(-x**2)))
-    print(trapezio_compost(3, 1, 4, lambda x: e**(-x**2)))
+    print(round(tapezio_simples(-1, 1, formula), 5))
+    print(round(trapezio_compost(-1, 1, 4, formula), 5))

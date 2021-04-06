@@ -1,4 +1,4 @@
-from math import e
+from math import e, sqrt, pi
 
 
 def metodo_simple(a, b, funcao):
@@ -11,17 +11,20 @@ def metodo_simple(a, b, funcao):
 
 
 def metodo_compost(a, b, n, funcao):
+    n = 2*n
     a, b = sorted([a, b])
 
-    h = (b - a) / 2
+    h = (b - a) / (n)
 
     intervalos = [a + h*it for it in range(n)]
     intervalos.append(b)
 
     soma = 0
-    for i in range(n):
-        soma += metodo_simple(intervalos[i], intervalos[i+1], funcao)
-    return soma
+    for i in range(1, n):
+        mult = 4 if i % 2 != 0 else 2
+        soma += mult * funcao(intervalos[i])
+
+    return (funcao(a) + soma + funcao(b)) * (h/3)
 
 
 def treis_oitavos(a, b, funcao):
@@ -32,7 +35,18 @@ def treis_oitavos(a, b, funcao):
     return metodo_simple(a, x2, funcao) + metodo_simple(x2, b, funcao)
 
 
-if __name__ == '__main__':
-    print(metodo_simple(1, 3, lambda x: e**(-x**2)))
-    print(metodo_compost(1, 3, 2, lambda x: e**(-x**2)))
+def formula(x):
+    return e ** (-(x**2) / 2) / (sqrt(2*pi))
 
+
+if __name__ == '__main__':
+    print(metodo_compost(0, 1, 4, lambda x: x * sqrt((x ** 2) + 1)))
+
+    intv = [
+        [-1, 1],
+        [-2, 2],
+        [-3, 3],
+    ]
+    for (_a, _b) in intv:
+        print(_a, _b)
+        print(round(metodo_compost(_a, _b, 4, formula), 5))
