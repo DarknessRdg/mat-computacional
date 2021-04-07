@@ -14,7 +14,7 @@ def metodo_compost(a, b, n, funcao):
     n = 2*n
     a, b = sorted([a, b])
 
-    h = (b - a) / (n)
+    h = (b - a) / n
 
     intervalos = [a + h*it for it in range(n)]
     intervalos.append(b)
@@ -30,9 +30,11 @@ def metodo_compost(a, b, n, funcao):
 def treis_oitavos(a, b, funcao):
     a, b = sorted([a, b])
 
-    h = (b - a) / 2
+    h = (b - a) / 3
     x2 = a + h
-    return metodo_simple(a, x2, funcao) + metodo_simple(x2, b, funcao)
+    x3 = a + 2*h
+
+    return (funcao(a) + 3 * funcao(x2) + 3 * funcao(x3) + funcao(b)) * ((3 * h) / 8)
 
 
 def formula(x):
@@ -40,13 +42,4 @@ def formula(x):
 
 
 if __name__ == '__main__':
-    print(metodo_compost(0, 1, 4, lambda x: x * sqrt((x ** 2) + 1)))
-
-    intv = [
-        [-1, 1],
-        [-2, 2],
-        [-3, 3],
-    ]
-    for (_a, _b) in intv:
-        print(_a, _b)
-        print(round(metodo_compost(_a, _b, 4, formula), 5))
+    print(round(metodo_compost(0, 180, 4.5, formula), 5))
